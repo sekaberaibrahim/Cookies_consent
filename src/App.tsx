@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Shield, Lock, ChevronDown, Check, X, Info, ExternalLink, Banknote, Globe } from "lucide-react";
+import { Shield, Lock, ChevronDown, Check, X, Info, ExternalLink, Banknote, Globe, ScrollText, Scale } from "lucide-react";
 
 type Language = "en" | "rw" | "fr";
 
@@ -13,45 +13,49 @@ const translations = {
     privacyNotice: "Privacy & Data Protection",
     secureSession: "Secure Session",
     bannerTitle: "Your Privacy Preferences",
-    bannerDesc: "We use cookies to enhance your experience, analyze site traffic, and for personalization. Essential cookies are required for the site to function securely.",
-    readPolicy: "Read Policy",
+    bannerDesc: "Bank of Kigali uses cookies to enhance your experience, analyze site traffic, and for personalization. Essential cookies are required for the site to function securely.",
+    readPolicy: "Read Privacy Policy",
     detailedSettings: "Detailed Settings",
-    necessaryTitle: "Strictly Necessary",
-    necessaryDesc: "Required for login, security, and core banking features.",
+    necessaryTitle: "Strictly Necessary Cookies",
+    necessaryDesc: "Necessary for the Site to function and cannot be switched off. They handle authentication and security.",
     alwaysActive: "Always Active",
-    analyticsTitle: "Analytics & Performance",
-    analyticsDesc: "Helps us improve our services by understanding how you use the site.",
-    personalizationTitle: "Personalization",
-    personalizationDesc: "Allows us to show you products and offers that match your interests.",
+    analyticsTitle: "Performance Cookies",
+    analyticsDesc: "Allow us to count visits and traffic sources so we can measure and improve the performance of our Site.",
+    personalizationTitle: "Functional Cookies",
+    personalizationDesc: "Enable the Site to provide enhanced functionality and personalization based on your banking habits.",
     acceptAll: "Accept All",
     savePreferences: "Save Preferences",
     necessaryOnly: "Necessary Only",
     successMsg: "Preferences updated successfully",
-    langName: "English"
+    langName: "English",
+    policyTitle: "Privacy Policy",
+    close: "Close"
   },
   rw: {
-    heroTitle: "Banki Itekanye.",
-    heroTitleGreen: "Ubwihisho Wizera.",
+    heroTitle: "Banki Ifite Umutekano.",
+    heroTitleGreen: "Ibanga Ryizewe.",
     heroSubtitle: "Twiyemeje kurinda amakuru yawe bwite no kwemeza ko uburyo ukoresha banki mu buryo bw'ikoranabuhanga butekanye kandi bujyanye n'ibyo ukeneye.",
     manageSettings: "Gucunga Igenamiterere ry'Ibwihisho",
     privacyNotice: "Ibwihisho & Kurinda Amakuru",
     secureSession: "Umuyoboro Utekanye",
     bannerTitle: "Ibyo Uhitamo ku Bwihisho",
-    bannerDesc: "Turakoresha 'cookies' kugira ngo tunonosore uburyo ukoresha urubuga, busesengure imikoreshereze yarwo, no kugira ngo tuguhe ibigukwiriye. 'Cookies' z'ingenzi zirakenewe kugira ngo urubuga rukore neza mu buryo butekanye.",
-    readPolicy: "Soma Politiki",
+    bannerDesc: "Bank of Kigali ikoresha 'cookies' kugira ngo tunonosore uburyo ukoresha urubuga, busesengure imikoreshereze yarwo, no kugira ngo tuguhe ibigukwiriye. 'Cookies' z'ingenzi zirakenewe kugira ngo urubuga rukore neza mu buryo butekanye.",
+    readPolicy: "Soma Politiki y'Ibwihisho",
     detailedSettings: "Igenamiterere Rirambuye",
-    necessaryTitle: "Iz'ingenzi cyane",
-    necessaryDesc: "Zirakenewe kugira ngo winjire, umutekano n'imikorere y'ibanze ya banki.",
+    necessaryTitle: "Cookies z'Ingenzi Cyane",
+    necessaryDesc: "Zirakenewe kugira ngo urubuga rukore kandi ntizishobora kuzimishwa. Zigenzura kwinjira n'umutekano.",
     alwaysActive: "Igihe cyose",
-    analyticsTitle: "Isesengura & Imikorere",
-    analyticsDesc: "Bidufasha kunoza serivisi zacu dusobanukirwa n'uburyo ukoresha urubuga.",
-    personalizationTitle: "Ibyo Uhitamo",
-    personalizationDesc: "Bidufasha kukwereka ibicuruzwa n'amatangazo ahuye n'ibyo ukunda.",
+    analyticsTitle: "Cookies z'Imikorere",
+    analyticsDesc: "Zidufasha kubara abasura n'inkomoko y'urujya n'uruza kugira ngo dushobore gupima no kunoza imikorere y'urubuga rwacu.",
+    personalizationTitle: "Cookies z'Ibyo Uhitamo",
+    personalizationDesc: "Zituma urubuga rutanga imikorere yisumbuyeho n'ibigukwiriye hashingiwe ku migenzereze yawe muri banki.",
     acceptAll: "Emeza Byose",
     savePreferences: "Bika Ibyo Uhisemo",
     necessaryOnly: "Iz'ingenzi Gusa",
     successMsg: "Ibyo uhisemo byabitswe neza",
-    langName: "Kinyarwanda"
+    langName: "Kinyarwanda",
+    policyTitle: "Politiki y'Ibwihisho",
+    close: "Funga"
   },
   fr: {
     heroTitle: "Banque Sécurisée.",
@@ -61,21 +65,23 @@ const translations = {
     privacyNotice: "Confidentialité & Protection des Données",
     secureSession: "Session Sécurisée",
     bannerTitle: "Vos préférences de confidentialité",
-    bannerDesc: "Nous utilisons des cookies pour améliorer votre expérience, analyser le trafic du site et pour la personnalisation. Les cookies essentiels sont nécessaires au fonctionnement sécurisé du site.",
-    readPolicy: "Lire la politique",
+    bannerDesc: "Bank of Kigali utilise des cookies pour améliorer votre expérience, analyser le trafic du site et pour la personnalisation. Les cookies essentiels sont nécessaires au fonctionnement sécurisé du site.",
+    readPolicy: "Lire la politique de confidentialité",
     detailedSettings: "Paramètres détaillés",
-    necessaryTitle: "Strictement Nécessaires",
-    necessaryDesc: "Requis pour la connexion, la sécurité et les fonctions bancaires de base.",
+    necessaryTitle: "Cookies Strictement Nécessaires",
+    necessaryDesc: "Nécessaires au fonctionnement du site et ne peuvent pas être désactivés. Ils gèrent l'authentification et la sécurité.",
     alwaysActive: "Toujours Actif",
-    analyticsTitle: "Analytique & Performance",
-    analyticsDesc: "Nous aide à améliorer nos services en comprenant comment vous utilisez le site.",
-    personalizationTitle: "Personnalisation",
-    personalizationDesc: "Nous permet de vous proposer des produits et des offres correspondant à vos intérêts.",
+    analyticsTitle: "Cookies de Performance",
+    analyticsDesc: "Nous permettent de compter les visites et les sources de trafic afin de mesurer et d'améliorer les performances de notre site.",
+    personalizationTitle: "Cookies Fonctionnels",
+    personalizationDesc: "Permettent au site de fournir des fonctionnalités améliorées et une personnalisation basée sur vos habitudes bancaires.",
     acceptAll: "Tout Accepter",
     savePreferences: "Enregistrer les préférences",
     necessaryOnly: "Nécessaires Uniquement",
     successMsg: "Préférences mises à jour avec succès",
-    langName: "Français"
+    langName: "Français",
+    policyTitle: "Politique de Confidentialité",
+    close: "Fermer"
   }
 };
 
@@ -88,6 +94,7 @@ export default function CookieConsent() {
   const [saved, setSaved] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [showLangMenu, setShowLangMenu] = useState(false);
+  const [showPolicy, setShowPolicy] = useState(false);
 
   const t = translations[lang];
 
@@ -199,6 +206,110 @@ export default function CookieConsent() {
         </motion.div>
       </div>
 
+      {/* Privacy Policy Modal */}
+      <AnimatePresence>
+        {showPolicy && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[10001] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="relative flex h-full max-h-[85vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between border-b border-[#DEE2E6] bg-[#F8F9FA] px-8 py-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0033A0] text-white">
+                    <ScrollText size={20} />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-[#1A1A1A]">{t.policyTitle}</h2>
+                    <p className="text-xs font-medium text-[#6C757D] uppercase tracking-wider">Bank of Kigali PLC</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setShowPolicy(false)}
+                  className="rounded-full p-2 text-[#6C757D] transition-colors hover:bg-black/5 hover:text-[#1A1A1A]"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="flex-1 overflow-y-auto p-8 text-sm leading-relaxed text-[#495057]">
+                <div className="prose prose-slate max-w-none">
+                  <h3 className="text-lg font-bold text-[#0033A0]">Introduction</h3>
+                  <p>This Privacy Policy is designed to help you understand how BANK OF KIGALI and its related subsidiaries and affiliates, including Bank of Kigali PLC (“we”, “us” or “our”) collects, uses and shares personal information collected through this website. We value your privacy, and we will not share your personal information with third parties except as described in this Privacy Policy without your consent. By using this website, you agree to be bound by this privacy policy.</p>
+
+                  <h3 className="mt-6 text-lg font-bold text-[#0033A0]">What this Privacy Policy Covers</h3>
+                  <p>This Privacy Policy applies to our collection, use and sharing of your personal information:</p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>When you visit our website at https://bk.rw/ (the “Site”)</li>
+                    <li>Receive our communications or participate in our activities</li>
+                    <li>Fill out an application for admission on our website</li>
+                    <li>Information obtained from third parties such as resellers and database vendors</li>
+                  </ul>
+
+                  <h3 className="mt-6 text-lg font-bold text-[#0033A0]">Personal Information We Collect</h3>
+                  <p><strong>Information you give us:</strong> Contact information (name, email, phone), feedback, and correspondence.</p>
+                  <p><strong>Information Automatically Collected:</strong> IP address, device type, browser type, and usage statistics collected via cookies and similar technologies.</p>
+
+                  <h3 className="mt-6 text-lg font-bold text-[#0033A0]">How We Use Your Personal Information</h3>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>To provide, maintain and improve the Site</li>
+                    <li>To personalize your experience</li>
+                    <li>To process applications</li>
+                    <li>To respond to requests and feedback</li>
+                    <li>To perform analytics and advertising</li>
+                  </ul>
+
+                  <h3 className="mt-6 text-lg font-bold text-[#0033A0]">Your Rights</h3>
+                  <p className="mb-4">You have certain rights regarding your personal data:</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[
+                      { title: "Access", desc: "Access your personal information." },
+                      { title: "Rectify", desc: "Correct inaccuracies in your data." },
+                      { title: "Delete", desc: "Erase your personal information." },
+                      { title: "Transfer", desc: "Request a machine-readable copy." },
+                      { title: "Restrict", desc: "Limit the processing of your data." },
+                      { title: "Object", desc: "Object to processing based on legitimate interests." }
+                    ].map(right => (
+                      <div key={right.title} className="flex items-start gap-2">
+                        <div className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#00A651] text-white">
+                          <Check size={10} />
+                        </div>
+                        <div>
+                          <span className="font-bold text-[#1A1A1A]">{right.title}:</span>
+                          <span className="ml-1">{right.desc}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <h3 className="mt-6 text-lg font-bold text-[#0033A0]">Cookie Policy</h3>
+                  <p>We use strictly necessary cookies (for site function), performance cookies (for analytics), and functional cookies (for personalization). You can manage these preferences through our cookie banner.</p>
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="border-t border-[#DEE2E6] bg-[#F8F9FA] px-8 py-6 flex justify-end">
+                <button
+                  onClick={() => setShowPolicy(false)}
+                  className="rounded-xl bg-[#0033A0] px-8 py-3 text-sm font-bold text-white shadow-lg shadow-[#0033A0]/20 transition-all hover:bg-[#002A85]"
+                >
+                  {t.close}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Cookie Banner */}
       <AnimatePresence>
         {visible && !dismissed && (
@@ -240,7 +351,10 @@ export default function CookieConsent() {
                   <h3 className="text-xl font-bold text-[#1A1A1A]">{t.bannerTitle}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-[#495057]">
                     {t.bannerDesc}
-                    <button className="ml-1 inline-flex items-center gap-1 font-semibold text-[#0033A0] hover:underline">
+                    <button 
+                      onClick={() => setShowPolicy(true)}
+                      className="ml-1 inline-flex items-center gap-1 font-semibold text-[#0033A0] hover:underline"
+                    >
                       {t.readPolicy} <ExternalLink size={12} />
                     </button>
                   </p>
