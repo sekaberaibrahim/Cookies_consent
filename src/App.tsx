@@ -10,7 +10,7 @@ const translations = {
     heroTitleGreen: "Trusted Privacy.",
     heroSubtitle: "We are committed to protecting your personal data and ensuring your digital banking experience is safe and personalized.",
     manageSettings: "Manage Privacy Settings",
-    privacyNotice: "Privacy & Data Protection",
+    privacyNotice: "Cookie Consent",
     secureSession: "Secure Session",
     bannerTitle: "Your Privacy Preferences",
     bannerDesc: "Bank of Kigali uses cookies to enhance your experience, analyze site traffic, and for personalization. Essential cookies are required for the site to function securely.",
