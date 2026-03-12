@@ -293,6 +293,11 @@ export default function CookieConsent() {
 
                   <h3 className="mt-6 text-lg font-bold text-[#0033A0]">Cookie Policy</h3>
                   <p>We use strictly necessary cookies (for site function), performance cookies (for analytics), and functional cookies (for personalization). You can manage these preferences through our cookie banner.</p>
+
+                  <h3 className="mt-6 text-lg font-bold text-[#0033A0]">Contact Our Data Protection Officer</h3>
+                  <p>To exercise any of your rights under Rwanda’s data protection law including access, correction, deletion, or objection to the processing of your personal data or for any inquiries, claims, or complaints regarding your personal data, you may contact our Data Protection officer group email at:</p>
+                  <p className="mt-2 font-bold text-[#0033A0]">Email: <a href="mailto:dpo@bk.rw" className="hover:underline">dpo@bk.rw</a></p>
+                  <p className="mt-2 italic">We are committed to responding to all requests in line with applicable legal timeframes.</p>
                 </div>
               </div>
 
